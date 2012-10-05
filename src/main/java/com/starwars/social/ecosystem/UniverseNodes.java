@@ -35,4 +35,11 @@ public class UniverseNodes {
     universe.getGraphDb().index().forNodes("Allegiances").putIfAbsent(allegianceNode, "allegiance", allegiance);
     return allegianceNode;
   }
+
+  public static Node createSystemNode(Universe universe, String system) {
+    Node systemNode = universe.getGraphDb().createNode();
+    systemNode.setProperty("name", system);
+    universe.getGraphDb().index().forNodes("Systems").putIfAbsent(systemNode, "system", system);
+    return systemNode;
+  }
 }

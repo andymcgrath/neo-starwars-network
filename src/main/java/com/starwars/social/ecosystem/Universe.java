@@ -45,7 +45,12 @@ public class Universe {
   }
 
   private void createSystems() {
-
+    TATOOINE_NODE = UniverseNodes.createSystemNode(this, TATOOINE);
+    DAGOBAH_NODE = UniverseNodes.createSystemNode(this, DAGOBAH);
+    ALDERAAN_NODE = UniverseNodes.createSystemNode(this, ALDERAAN);
+    CORUSCANT_NODE = UniverseNodes.createSystemNode(this, CORUSCANT);
+    CORELLIA_NODE = UniverseNodes.createSystemNode(this, CORELLIA);
+    KASHYYYK_NODE = UniverseNodes.createSystemNode(this, KASHYYYK);
   }
 
   private void establishPolitics() {
@@ -94,6 +99,7 @@ public class Universe {
       UniverseRelationships.chooseSides(VADER_NODE, JEDI_NODE);
       UniverseRelationships.chooseSides(VADER_NODE, EMPIRE_NODE);
       UniverseRelationships.chooseSides(VADER_NODE, DARK_SIDE_NODE);
+
       tx.success();
     } finally {
       tx.finish();
