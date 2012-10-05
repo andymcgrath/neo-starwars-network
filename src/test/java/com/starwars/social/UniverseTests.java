@@ -1,5 +1,9 @@
 package com.starwars.social;
 
+import com.starwars.social.ecosystem.RelationshipTypes;
+import com.starwars.social.ecosystem.Universe;
+import com.starwars.social.ecosystem.UniverseNodes;
+import com.starwars.social.navigation.UniverseExplorer;
 import org.junit.Test;
 import org.neo4j.cypher.javacompat.ExecutionResult;
 import org.neo4j.graphdb.Direction;
@@ -8,6 +12,8 @@ import org.neo4j.graphdb.Transaction;
 
 import java.util.Map;
 
+import static com.starwars.social.ecosystem.UniversalConstants.LUKE;
+import static com.starwars.social.ecosystem.UniverseRelationships.makeFriends;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -15,14 +21,14 @@ import static org.junit.Assert.assertEquals;
  * Date: 10/1/12
  */
 public class UniverseTests {
-  public static final Universe u = new Universe("data/universe.db");
+  private static Universe universe = new Universe("data/universe.db");
 
   @Test
   public void createPersonNode() {
-    Transaction tx = u.graphDb.beginTx();
+    Transaction tx = universe.getGraphDb().beginTx();
     Node person;
     try {
-      person = u.createPersonNode("Test Person");
+      person = UniverseNodes.createPersonNode(universe, "Test Person");
       tx.success();
     } finally {
       tx.finish();
@@ -33,14 +39,14 @@ public class UniverseTests {
 
   @Test
   public void createRelationshipNode() {
-    Transaction tx = u.graphDb.beginTx();
     Node person;
     Node person2;
+    Transaction tx = universe.getGraphDb().beginTx();
 
     try {
-      person = u.createPersonNode("Test Person");
-      person2 = u.createPersonNode("Test Person-2");
-      person.createRelationshipTo(person2, RelationshipTypes.FRIENDS_WITH);
+      person = UniverseNodes.createPersonNode(universe, "Test Person");
+      person2 = UniverseNodes.createPersonNode(universe, "Test Person-2");
+      makeFriends(universe, person, person2);
       tx.success();
 
     } finally {
@@ -56,8 +62,8 @@ public class UniverseTests {
   }
 
   @Test
-  public void lukeFriendOfAFriend() {
-    ExecutionResult result = u.getFriendsOfFriends(u.LUKE);
+  public void lukeFriendOfAFriendIsChewbacca() {
+    ExecutionResult result = UniverseExplorer.getFriendsOfFriends(universe, LUKE);
     if (result.iterator().hasNext()) {
       System.out.println(result.iterator().next().get("fof.name"));
     }

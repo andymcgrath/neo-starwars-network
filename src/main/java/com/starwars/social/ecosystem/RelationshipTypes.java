@@ -1,4 +1,4 @@
-package com.starwars.social;
+package com.starwars.social.ecosystem;
 
 import org.neo4j.graphdb.RelationshipType;
 
