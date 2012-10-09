@@ -11,7 +11,7 @@ import org.neo4j.graphdb.Node;
 public class UniverseNodes {
 
   /**
-   * Method to create new node
+   * Method to create new Person node
    * - First checks if NODE already exists
    * - If not, creates the new node and adds a new entry in the PERSONS index
    */
@@ -23,23 +23,48 @@ public class UniverseNodes {
     } else {
       System.out.println("Creating Node [" + name + "]");
       Node person = universe.getGraphDb().createNode();
-      person.setProperty(UniversalConstants.PERSON_NAME, name);
-      universe.getGraphDb().index().forNodes("Persons").putIfAbsent(person, UniversalConstants.PERSON_NAME, name);
+      person.setProperty(UniversalConstants.NAME, name);
+      universe.getGraphDb().index().forNodes("Persons").putIfAbsent(person, UniversalConstants.NAME, name);
       return person;
     }
   }
 
+  /**
+   * Method to create new Allegiance node
+   * - First checks if NODE already exists
+   * - If not, creates the new node and adds a new entry in the Allegiances index
+   */
   public static Node createAllegianceNode(Universe universe, String allegiance) {
-    Node allegianceNode = universe.getGraphDb().createNode();
-    allegianceNode.setProperty("name", allegiance);
-    universe.getGraphDb().index().forNodes("Allegiances").putIfAbsent(allegianceNode, "allegiance", allegiance);
-    return allegianceNode;
+    if (UniverseExplorer.lookupAllegiance(universe, allegiance) != null) {
+      System.out.println("Found Node [" + allegiance + "] with id [" + UniverseExplorer.lookupAllegiance(universe, allegiance).getId() + "]");
+      return UniverseExplorer.lookupAllegiance(universe, allegiance);
+
+    } else {
+      Node allegianceNode = universe.getGraphDb().createNode();
+      allegianceNode.setProperty(UniversalConstants.NAME, allegiance);
+      universe.getGraphDb().index().forNodes("Allegiances").putIfAbsent(allegianceNode, UniversalConstants.NAME, allegiance);
+      return allegianceNode;
+    }
   }
 
-  public static Node createSystemNode(Universe universe, String system) {
-    Node systemNode = universe.getGraphDb().createNode();
-    systemNode.setProperty("name", system);
-    universe.getGraphDb().index().forNodes("Systems").putIfAbsent(systemNode, "system", system);
-    return systemNode;
+  /**
+   * Method to create new System node
+   * - First checks if NODE already exists
+   * - If not, creates the new node and adds a new entry in the Systems index
+   * - This nodes also carries a second property of "Distance From Core", core being the Galactic Core
+   */
+  public static Node createSystemNode(Universe universe, String system, Integer distanceFromCore) {
+    if (UniverseExplorer.lookupSystem(universe, system) != null) {
+      System.out.println("Found Node [" + system + "] with id [" + UniverseExplorer.lookupSystem(universe, system).getId() + "]");
+      return UniverseExplorer.lookupSystem(universe, system);
+
+    } else {
+      Node systemNode = universe.getGraphDb().createNode();
+      systemNode.setProperty(UniversalConstants.NAME, system);
+      systemNode.setProperty(UniversalConstants.DISTANCE, distanceFromCore);
+      universe.getGraphDb().index().forNodes("Systems").putIfAbsent(systemNode, UniversalConstants.NAME, system);
+      return systemNode;
+
+    }
   }
 }

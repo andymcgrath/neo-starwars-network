@@ -42,21 +42,29 @@ public class Universe {
     this.establishPolitics();
     this.establishRelationships();
     this.associateAllegiances();
+    this.designateHomeWorld();
   }
 
   private void createSystems() {
-    TATOOINE_NODE = UniverseNodes.createSystemNode(this, TATOOINE);
-    DAGOBAH_NODE = UniverseNodes.createSystemNode(this, DAGOBAH);
-    ALDERAAN_NODE = UniverseNodes.createSystemNode(this, ALDERAAN);
-    CORUSCANT_NODE = UniverseNodes.createSystemNode(this, CORUSCANT);
-    CORELLIA_NODE = UniverseNodes.createSystemNode(this, CORELLIA);
-    KASHYYYK_NODE = UniverseNodes.createSystemNode(this, KASHYYYK);
+    Transaction tx = this.graphDb.beginTx();
+    try {
+      TATOOINE_NODE = UniverseNodes.createSystemNode(this, TATOOINE, 13184);
+      DAGOBAH_NODE = UniverseNodes.createSystemNode(this, DAGOBAH, 15407);
+      ALDERAAN_NODE = UniverseNodes.createSystemNode(this, ALDERAAN, 1502);
+      CORUSCANT_NODE = UniverseNodes.createSystemNode(this, CORUSCANT, 3066);
+      CORELLIA_NODE = UniverseNodes.createSystemNode(this, CORELLIA, 2453);
+      KASHYYYK_NODE = UniverseNodes.createSystemNode(this, KASHYYYK, 9811);
+      tx.success();
+    } finally {
+      tx.finish();
+    }
   }
 
   private void establishPolitics() {
     Transaction tx = this.graphDb.beginTx();
     try {
       JEDI_NODE = UniverseNodes.createAllegianceNode(this, JEDI);
+      SITH_NODE = UniverseNodes.createAllegianceNode(this, SITH);
       REBELLION_NODE = UniverseNodes.createAllegianceNode(this, REBELLION);
       EMPIRE_NODE = UniverseNodes.createAllegianceNode(this, EMPIRE);
       HIGHEST_BIDDER_NODE = UniverseNodes.createAllegianceNode(this, HIGHEST_BIDDER);
@@ -90,16 +98,42 @@ public class Universe {
     }
   }
 
+  private void designateHomeWorld() {
+    Transaction tx = this.graphDb.beginTx();
+    try {
+      UniverseRelationships.callsHome(this, LUKE_NODE, TATOOINE_NODE);
+      UniverseRelationships.callsHome(this, HAN_NODE, CORELLIA_NODE);
+      UniverseRelationships.callsHome(this, LEIA_NODE, ALDERAAN_NODE);
+      UniverseRelationships.callsHome(this, YODA_NODE, DAGOBAH_NODE);
+      UniverseRelationships.callsHome(this, VADER_NODE, TATOOINE_NODE);
+      UniverseRelationships.callsHome(this, CHEWBACCA_NODE, KASHYYYK_NODE);
+      UniverseRelationships.callsHome(this, OBI_WAN_NODE, TATOOINE_NODE);
+      UniverseRelationships.callsHome(this, TARKIN_NODE, CORUSCANT_NODE);
+      tx.success();
+    } finally {
+      tx.finish();
+    }
+  }
+
   private void associateAllegiances() {
     Transaction tx = this.graphDb.beginTx();
     try {
-      UniverseRelationships.chooseSides(LUKE_NODE, JEDI_NODE);
-      UniverseRelationships.chooseSides(LUKE_NODE, REBELLION_NODE);
-      UniverseRelationships.chooseSides(LUKE_NODE, LIGHT_SIDE_NODE);
-      UniverseRelationships.chooseSides(VADER_NODE, JEDI_NODE);
-      UniverseRelationships.chooseSides(VADER_NODE, EMPIRE_NODE);
-      UniverseRelationships.chooseSides(VADER_NODE, DARK_SIDE_NODE);
-
+      UniverseRelationships.chooseSides(this, LUKE_NODE, JEDI_NODE);
+      UniverseRelationships.chooseSides(this, LUKE_NODE, REBELLION_NODE);
+      UniverseRelationships.chooseSides(this, LUKE_NODE, LIGHT_SIDE_NODE);
+      UniverseRelationships.chooseSides(this, VADER_NODE, SITH_NODE);
+      UniverseRelationships.chooseSides(this, VADER_NODE, EMPIRE_NODE);
+      UniverseRelationships.chooseSides(this, VADER_NODE, DARK_SIDE_NODE);
+      UniverseRelationships.chooseSides(this, LEIA_NODE, REBELLION_NODE);
+      UniverseRelationships.chooseSides(this, HAN_NODE, REBELLION_NODE);
+      UniverseRelationships.chooseSides(this, TARKIN_NODE, EMPIRE_NODE);
+      UniverseRelationships.chooseSides(this, BOBA_FETT_NODE, HIGHEST_BIDDER_NODE);
+      UniverseRelationships.chooseSides(this, OBI_WAN_NODE, JEDI_NODE);
+      UniverseRelationships.chooseSides(this, OBI_WAN_NODE, REBELLION_NODE);
+      UniverseRelationships.chooseSides(this, OBI_WAN_NODE, LIGHT_SIDE_NODE);
+      UniverseRelationships.chooseSides(this, YODA_NODE, JEDI_NODE);
+      UniverseRelationships.chooseSides(this, YODA_NODE, REBELLION_NODE);
+      UniverseRelationships.chooseSides(this, YODA_NODE, LIGHT_SIDE_NODE);
       tx.success();
     } finally {
       tx.finish();
@@ -112,6 +146,18 @@ public class Universe {
       UniverseRelationships.makeFriends(this, LUKE_NODE, HAN_NODE);
       UniverseRelationships.makeFriends(this, LUKE_NODE, LEIA_NODE);
       UniverseRelationships.makeFriends(this, HAN_NODE, CHEWBACCA_NODE);
+
+      UniverseRelationships.teaches(this, YODA_NODE, OBI_WAN_NODE);
+      UniverseRelationships.teaches(this, YODA_NODE, LUKE_NODE);
+      UniverseRelationships.teaches(this, OBI_WAN_NODE, LUKE_NODE);
+      UniverseRelationships.makeAcquaintances(this, OBI_WAN_NODE, VADER_NODE);
+
+      UniverseRelationships.makeAcquaintances(this, TARKIN_NODE, VADER_NODE);
+      UniverseRelationships.makeAcquaintances(this, VADER_NODE, YODA_NODE);
+      UniverseRelationships.makeAcquaintances(this, VADER_NODE, LEIA_NODE);
+      UniverseRelationships.makeAcquaintances(this, LEIA_NODE, LUKE_NODE);
+      UniverseRelationships.makeAcquaintances(this, LUKE_NODE, YODA_NODE);
+
       tx.success();
     } finally {
       tx.finish();

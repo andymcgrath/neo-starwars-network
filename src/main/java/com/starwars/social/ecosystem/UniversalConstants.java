@@ -9,6 +9,8 @@ import org.neo4j.graphdb.Node;
 
 public class UniversalConstants {
   // People
+  public static final String NAME = "name";
+  public static final String DISTANCE = "distance";
   public static final String LUKE = "Luke Skywalker";
   public static final String HAN = "Han Solo";
   public static final String LEIA = "Princess Leia Organa";
@@ -22,7 +24,6 @@ public class UniversalConstants {
   public static final String JABBA = "Jabba The Hut";
   public static final String GREEDO = "Greedo";
   public static final String CHEWBACCA = "Chewbacca";
-  public static final String PERSON_NAME = "name";
 
   public static Node LUKE_NODE;
   public static Node HAN_NODE;
@@ -40,6 +41,7 @@ public class UniversalConstants {
 
   // Politics
   public static final String JEDI = "Jedi";
+  public static final String SITH = "Sith";
   public static final String REBELLION = "Rebellion";
   public static final String EMPIRE = "Empire";
   public static final String HIGHEST_BIDDER = "Highest Bidder";
@@ -47,6 +49,7 @@ public class UniversalConstants {
   public static final String LIGHT_SIDE = "Light Side of the Force";
 
   public static Node JEDI_NODE;
+  public static Node SITH_NODE;
   public static Node REBELLION_NODE;
   public static Node EMPIRE_NODE;
   public static Node HIGHEST_BIDDER_NODE;
