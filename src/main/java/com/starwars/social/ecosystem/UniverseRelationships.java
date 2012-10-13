@@ -14,7 +14,7 @@ public class UniverseRelationships {
   public static void chooseSides(Universe universe, Node person, Node allegiance) {
 
     if (UniverseExplorer.lookupAllegianceRelationship(universe, person, allegiance).iterator().hasNext()) {
-      System.out.println("\nFound Existing Relationship [" + allegiance.getProperty("name") + "] with  [" + person.getProperty("name") + "]\n");
+      System.out.println("Found Existing Relationship [" + allegiance.getProperty("name") + "] with  [" + person.getProperty("name") + "]\n");
 
     } else {
       System.out.println("Creating unique allegiance between " + person.getProperty("name") + " and " + allegiance.getProperty("name"));
@@ -27,7 +27,7 @@ public class UniverseRelationships {
 
   public static void makeFriends(Universe universe, Node person, Node friend) {
     if (UniverseExplorer.lookupFriendship(universe, person, friend).iterator().hasNext()) {
-      System.out.println("\nFound Existing Friendship between [" + friend.getProperty("name") + "] and [" + person.getProperty("name") + "]\n");
+      System.out.println("Found Existing Friendship between [" + friend.getProperty("name") + "] and [" + person.getProperty("name") + "]\n");
 
     } else {
       System.out.println("Creating unique friendship between " + person.getProperty("name") + " and " + friend.getProperty("name"));
@@ -39,7 +39,7 @@ public class UniverseRelationships {
 
   public static void callsHome(Universe universe, Node person, Node system) {
     if (UniverseExplorer.lookupSystemRelatioinship(universe, person, system).iterator().hasNext()) {
-      System.out.println("\nFound Existing Relationship [" + system.getProperty("name") + "] with [" + person.getProperty("name") + "]\n");
+      System.out.println("Found Existing Relationship [" + system.getProperty("name") + "] with [" + person.getProperty("name") + "]\n");
 
     } else {
       System.out.println("Creating unique geographic reference between " + person.getProperty("name") + " and " + system.getProperty("name"));
@@ -51,7 +51,7 @@ public class UniverseRelationships {
 
   public static void makeAcquaintances(Universe universe, Node person, Node acquaintance) {
     if (UniverseExplorer.lookupAcquaintance(universe, person, acquaintance).iterator().hasNext()) {
-      System.out.println("\nFound Existing Acquiantance between [" + acquaintance.getProperty("name") + "] and [" + person.getProperty("name") + "]\n");
+      System.out.println("Found Existing Acquaintance between [" + acquaintance.getProperty("name") + "] and [" + person.getProperty("name") + "]\n");
 
     } else {
       System.out.println("Creating unique acquaintance between " + person.getProperty("name") + " and " + acquaintance.getProperty("name"));
@@ -63,7 +63,7 @@ public class UniverseRelationships {
 
   public static void teaches(Universe universe, Node person, Node student) {
     if (UniverseExplorer.lookupTeacherRelationship(universe, person, student).iterator().hasNext()) {
-      System.out.println("\nFound Existing Mentorship between [" + person.getProperty("name") + "] and [" + student.getProperty("name") + "]\n");
+      System.out.println("Found Existing Mentorship between [" + person.getProperty("name") + "] and [" + student.getProperty("name") + "]\n");
 
     } else {
       System.out.println("Creating unique mentorship between " + person.getProperty("name") + " and " + student.getProperty("name"));
