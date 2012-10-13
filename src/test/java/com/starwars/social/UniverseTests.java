@@ -144,7 +144,8 @@ public class UniverseTests {
       System.out.println(result);
     }
     for (Map<String, Object> row : result) {
-      // assertEquals("Chewbacca", row.get("fof.name"));
+      String expected = "(12)--[KNOWS,7]-->(13)--[KNOWS,8]-->(11)";
+      assertEquals(expected, row.get("shortestPath").toString());
     }
   }
 
