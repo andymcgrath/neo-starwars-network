@@ -42,6 +42,23 @@ public class UniverseTests {
   }
 
   @Test
+  public void createDroidNode() {
+    Transaction tx = universe.getGraphDb().beginTx();
+    Node droid;
+    try {
+      droid = UniverseNodes.createDroidNode(universe, "Test Droid");
+      tx.success();
+    } finally {
+      tx.finish();
+    }
+    assert (droid.hasProperty("name"));
+    assertEquals(droid.getProperty("name"), "Test Droid");
+    assertEquals(droid.getProperty("droid"),  true);
+
+    deleteNode(droid);
+  }
+
+  @Test
   public void createSystemNode() {
     Transaction tx = universe.getGraphDb().beginTx();
     Node system;

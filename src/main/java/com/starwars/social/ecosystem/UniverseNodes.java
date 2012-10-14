@@ -16,16 +16,36 @@ public class UniverseNodes {
    * - If not, creates the new node and adds a new entry in the PERSONS index
    */
   public static Node createPersonNode(Universe universe, String name) {
-    if (UniverseExplorer.lookupPerson(universe, name) != null) {
-      System.out.println("Found Node [" + name + "] with id [" + UniverseExplorer.lookupPerson(universe, name).getId() + "]");
-      return UniverseExplorer.lookupPerson(universe, name);
+    if (UniverseExplorer.lookupCharacter(universe, name) != null) {
+      System.out.println("Found Node [" + name + "] with id [" + UniverseExplorer.lookupCharacter(universe, name).getId() + "]");
+      return UniverseExplorer.lookupCharacter(universe, name);
 
     } else {
       System.out.println("Creating Node [" + name + "]");
-      Node person = universe.getGraphDb().createNode();
-      person.setProperty(UniversalConstants.NAME, name);
-      universe.getGraphDb().index().forNodes("Persons").putIfAbsent(person, UniversalConstants.NAME, name);
-      return person;
+      Node character = universe.getGraphDb().createNode();
+      character.setProperty(UniversalConstants.NAME, name);
+      universe.getGraphDb().index().forNodes("Characters").putIfAbsent(character, UniversalConstants.NAME, name);
+      return character;
+    }
+  }
+
+  /**
+   * Method to create new Droid node
+   * - First checks if NODE already exists
+   * - If not, creates the new node and adds a new entry in the PERSONS index
+   */
+  public static Node createDroidNode(Universe universe, String name) {
+    if (UniverseExplorer.lookupCharacter(universe, name) != null) {
+      System.out.println("Found Node [" + name + "] with id [" + UniverseExplorer.lookupCharacter(universe, name).getId() + "]");
+      return UniverseExplorer.lookupCharacter(universe, name);
+
+    } else {
+      System.out.println("Creating Node [" + name + "]");
+      Node character = universe.getGraphDb().createNode();
+      character.setProperty(UniversalConstants.NAME, name);
+      character.setProperty(UniversalConstants.DROID, true);
+      universe.getGraphDb().index().forNodes("Characters").putIfAbsent(character, UniversalConstants.NAME, name);
+      return character;
     }
   }
 

@@ -86,8 +86,8 @@ public class Universe {
       YODA_NODE = UniverseNodes.createPersonNode(this, YODA);
       TARKIN_NODE = UniverseNodes.createPersonNode(this, TARKIN);
       VADER_NODE = UniverseNodes.createPersonNode(this, VADER);
-      C3P0_NODE = UniverseNodes.createPersonNode(this, C3P0);
-      R2D2_NODE = UniverseNodes.createPersonNode(this, R2D2);
+      C3P0_NODE = UniverseNodes.createDroidNode(this, C3P0);
+      R2D2_NODE = UniverseNodes.createDroidNode(this, R2D2);
       BOBA_FETT_NODE = UniverseNodes.createPersonNode(this, BOBA_FETT);
       JABBA_NODE = UniverseNodes.createPersonNode(this, JABBA);
       GREEDO_NODE = UniverseNodes.createPersonNode(this, GREEDO);

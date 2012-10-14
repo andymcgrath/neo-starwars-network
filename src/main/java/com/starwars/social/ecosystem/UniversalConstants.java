@@ -11,6 +11,7 @@ public class UniversalConstants {
   // People
   public static final String NAME = "name";
   public static final String DISTANCE = "distance";
+  public static final String DROID = "droid";
   public static final String LUKE = "Luke Skywalker";
   public static final String HAN = "Han Solo";
   public static final String LEIA = "Princess Leia Organa";

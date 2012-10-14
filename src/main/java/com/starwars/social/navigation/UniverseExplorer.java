@@ -30,7 +30,7 @@ public class UniverseExplorer {
     return engine.execute(query);
   }
 
-  public static Node lookupPerson(Universe universe, String name) {
+  public static Node lookupCharacter(Universe universe, String name) {
     return universe.getGraphDb().index().forNodes("Persons").get(NAME, name).getSingle();
   }
 
