@@ -157,6 +157,12 @@ public class Universe {
       UniverseRelationships.makeAcquaintances(this, VADER_NODE, LEIA_NODE);
       UniverseRelationships.makeAcquaintances(this, LEIA_NODE, LUKE_NODE);
       UniverseRelationships.makeAcquaintances(this, LUKE_NODE, YODA_NODE);
+      UniverseRelationships.makeAcquaintances(this, TARKIN_NODE, BOBA_FETT_NODE);
+      UniverseRelationships.makeAcquaintances(this, BOBA_FETT_NODE, JABBA_NODE);
+      UniverseRelationships.makeAcquaintances(this, JABBA_NODE, GREEDO_NODE);
+      UniverseRelationships.makeAcquaintances(this, LUKE_NODE, R2D2_NODE);
+      UniverseRelationships.makeAcquaintances(this, R2D2_NODE, C3P0_NODE);
+      UniverseRelationships.makeAcquaintances(this, VADER_NODE, C3P0_NODE);
 
       tx.success();
     } finally {
