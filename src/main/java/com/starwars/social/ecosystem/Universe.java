@@ -17,8 +17,11 @@ public class Universe {
   private GraphDatabaseService graphDb;
 
   public Universe(String databasePath) {
-    this.graphDb = new GraphDatabaseFactory().newEmbeddedDatabaseBuilder(databasePath).setConfig(GraphDatabaseSettings.node_auto_indexing, "true").setConfig(GraphDatabaseSettings.node_keys_indexable, "name")
-        .setConfig(GraphDatabaseSettings.relationship_auto_indexing, "true").setConfig(GraphDatabaseSettings.relationship_keys_indexable, "name").newGraphDatabase();
+    this.graphDb = new GraphDatabaseFactory().newEmbeddedDatabaseBuilder(databasePath)
+            .setConfig(GraphDatabaseSettings.node_auto_indexing, "true")
+            .setConfig(GraphDatabaseSettings.node_keys_indexable, "name")
+            .setConfig(GraphDatabaseSettings.relationship_auto_indexing, "true")
+            .setConfig(GraphDatabaseSettings.relationship_keys_indexable, "name").newGraphDatabase();
     this.createStarWarsUniverse();
     registerShutdownHook(this.graphDb);
   }
