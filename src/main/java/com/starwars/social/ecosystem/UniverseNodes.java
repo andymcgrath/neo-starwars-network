@@ -13,7 +13,7 @@ public class UniverseNodes {
   /**
    * Method to create new Person node
    * - First checks if NODE already exists
-   * - If not, creates the new node and adds a new entry in the PERSONS index
+   * - If not, creates the new node and adds a new entry in the Characters index
    */
   public static Node createPersonNode(Universe universe, String name) {
     if (UniverseExplorer.lookupCharacter(universe, name) != null) {
@@ -32,7 +32,7 @@ public class UniverseNodes {
   /**
    * Method to create new Droid node
    * - First checks if NODE already exists
-   * - If not, creates the new node and adds a new entry in the PERSONS index
+   * - If not, creates the new node and adds a new entry in the Characters index
    */
   public static Node createDroidNode(Universe universe, String name) {
     if (UniverseExplorer.lookupCharacter(universe, name) != null) {
