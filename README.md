@@ -1,7 +1,7 @@
 Navigating the Star Wars Universe with Neo4j
 ============================================
 
-This project supports the blog entry at: <insert URL here when available>
+This project supports the blog entry at: http://solutiondesign.com/navigating-the-star-wars-universe-with-neo4j/
 
 **Universe.java**: The primary class that seeds the "Universe" with people, places of origin, and relationships to other characters.
 
